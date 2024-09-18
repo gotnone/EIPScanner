@@ -6,6 +6,9 @@
 
 #if defined(_WIN32) || defined(WIN32) || defined(_WIN64)
 #include <windows.h>
+#if defined(__MINGW32__)
+#include <cstdint>
+#endif
 
 namespace eipScanner {
 namespace sockets {
