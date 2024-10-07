@@ -65,6 +65,7 @@ set_target_properties(
         SOVERSION ${EIPSCANNER_MAJOR_VERSION})
 
 install(TARGETS EIPScanner EIPScannerS
+        EXPORT eipscannerTargets
         LIBRARY
             DESTINATION lib
         ARCHIVE
@@ -73,3 +74,15 @@ install(TARGETS EIPScanner EIPScannerS
 install(DIRECTORY ${PROJECT_SOURCE_DIR}/src/
         DESTINATION include/EIPScanner
         FILES_MATCHING PATTERN "*.h*")
+
+# Export the targets to a file
+export(EXPORT eipscannerTargets
+    FILE "${CMAKE_CURRENT_BINARY_DIR}/eipscannerTargets.cmake"
+    NAMESPACE eipscanner::
+)
+
+install(EXPORT eipscannerTargets
+    FILE eipscannerTargets.cmake
+    DESTINATION lib/cmake/eipscanner
+)
+

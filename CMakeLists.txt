@@ -40,3 +40,28 @@ configure_file(EIPScanner.pc.in EIPScanner.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/EIPScanner.pc
         DESTINATION lib/pkgconfig)
+
+include(CMakePackageConfigHelpers)
+
+# This writes out a basic version file
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/eipscannerConfigVersion.cmake"
+  VERSION ${PACKAGE_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+# This config file points to the target files
+configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/eipscannerConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/eipscannerConfig.cmake"
+  INSTALL_DESTINATION lib/cmake/eipscanner
+)
+
+# Install the files
+install(
+  FILES
+    "${CMAKE_CURRENT_BINARY_DIR}/eipscannerConfig.cmake"
+    "${CMAKE_CURRENT_BINARY_DIR}/eipscannerConfigVersion.cmake"
+  DESTINATION
+    lib/cmake/eipscanner
+)
